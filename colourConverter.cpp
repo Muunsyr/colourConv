@@ -2,14 +2,6 @@
 #include <math.h>
 #include <iostream>
 
-colourConverter::colourConverter()
-{
-}
-
-colourConverter::~colourConverter()
-{
-}
-
 void colourConverter::hsl_to_rgb(float hue, float saturation, float lightness, int * rgb_array)
 {
     float hprime = 0.0;
@@ -118,7 +110,8 @@ void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, int * rgb_
 }
 
 /**
- * @brief Caluculates a hues minor component value
+ * @brief Caluculates a hues minor component value. Assumes hprime is
+ * in range[0, 6)
  * @param hprime Hue modulo 60. 
  * @param chroma Chroma, needed to determine magnitude
  * @return minor component of colour before luma calc.
