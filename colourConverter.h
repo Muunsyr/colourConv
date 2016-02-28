@@ -14,6 +14,7 @@ public:
     static void hcl_to_rgb(float, float, float, int *);
 private:
     static float checkedHue(float);
+    static float minorComponent(float, float);
 };
 
 #endif // COLOURCONVERTER_H

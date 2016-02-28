@@ -27,13 +27,8 @@ void colourConverter::hsl_to_rgb(float hue, float saturation, float lightness, i
         sector++;
     }
     
-    x = fmod(hprime, 2.0);
-    x -= 1;
-    x = fabs(x);
-    x = 1 - x;
-    x *= chroma;
+    x = minorComponent(hprime, chroma);
 
-    printf("sector: %d\n", sector);
     // assign partial values based on sector
     switch (sector) {
     case 1:
@@ -84,11 +79,7 @@ void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, int * rgb_
         sector++;
     }
     
-    x = fmod(hprime, 2.0);
-    x -= 1;
-    x = fabs(x);
-    x = 1 - x;
-    x *= chroma;
+    x = minorComponent(hprime, chroma); 
 
     // assign partial values based on sector
     switch (sector) {
@@ -124,6 +115,21 @@ void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, int * rgb_
   rgb_array[0] = (rprime + x) * 255;
   rgb_array[1] = (gprime + x) * 255;
   rgb_array[2] = (bprime + x) * 255;
+}
+
+/**
+ * @brief Caluculates a hues minor component value
+ * @param hprime Hue modulo 60. 
+ * @param chroma Chroma, needed to determine magnitude
+ * @return minor component of colour before luma calc.
+ */
+float colourConverter::minorComponent(float hprime, float chroma) {
+    float minor = fmod(hprime, 2.0);
+    minor -= 1;
+    minor = fabs(minor);
+    minor = 1 - minor;
+    minor *= chroma;
+    return minor;
 }
 
 /**
