@@ -1,0 +1,8 @@
+Make conversion return floats
+Make it assume inputs correct for HCL (they can be out)
+Investigate S instead of C (% of max chroma possible for that luma)
+ - This may mess up nice calcs?
+ -- Maybe multiply chroma by luma if luma < 0.5
+ --- and chroma by (1-luma) if luma > 0.5 
+ --- then do hprime calc
+Improve the "test suite"
