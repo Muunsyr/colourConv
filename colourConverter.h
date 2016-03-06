@@ -8,9 +8,9 @@
 class colourConverter
 {
 public:
-    static void hsl_to_rgb(float, float, float, int *);
-    static void hcl_to_rgb(float, float, float, int *);
-    float minorComponent(float, float);
+    static void hsl_to_rgb(float, float, float, float *);
+    static void hcl_to_rgb(float, float, float, float *);
+    static float minorComponent(float, float);
 private:
     static float checkedHue(float);
 };

@@ -5,11 +5,11 @@
 #include "colourConverter.h"
 using namespace std;
 
-void diag(int*);
+void diag(float*);
 int main()
 {
     float h = 0.0, c = 0.75, l = 0.5;
-    int rgb[3] = {0, 0, 0};
+    float rgb[3] = {0, 0, 0};
     
     colourConverter::hcl_to_rgb(h, c, l, rgb);
     
@@ -36,7 +36,7 @@ int main()
 
     // Ensure values are in correct range
     for (int i = 0; i < 3; i++) {
-        if (rgb[i] < 0 || rgb[i] > 255) {
+        if (rgb[i] < 0 || rgb[i] > 1) {
             printf("FAIL - outside range [0, 255]\n");
             diag(rgb);
             break;
@@ -46,8 +46,8 @@ int main()
     return 0;
 }
 
-void diag(int *rgb) {
-    printf("Red: %d\n", rgb[0]);
-    printf("Green: %d\n", rgb[1]);
-    printf("Blue: %d\n", rgb[2]);
+void diag(float *rgb) {
+    printf("Red: %d\n", int(rgb[0]*255));
+    printf("Green: %d\n", int(rgb[1]*255));
+    printf("Blue: %d\n", int(rgb[2]*255));
 }

@@ -2,7 +2,7 @@
 #include <math.h>
 #include <iostream>
 
-void colourConverter::hsl_to_rgb(float hue, float saturation, float lightness, int * rgb_array)
+void colourConverter::hsl_to_rgb(float hue, float saturation, float lightness, float * rgb_array)
 {
     float hprime = 0.0;
     float chroma = 0.0;
@@ -52,12 +52,12 @@ void colourConverter::hsl_to_rgb(float hue, float saturation, float lightness, i
   // Calculate luma difference
   x = lightness - 0.5 * chroma;
   
-  rgb_array[0] = (rprime + x) * 255;
-  rgb_array[1] = (gprime + x) * 255;
-  rgb_array[2] = (bprime + x) * 255;
+  rgb_array[0] = rprime + x;
+  rgb_array[1] = gprime + x;
+  rgb_array[2] = bprime + x;
 }
 
-void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, int * rgb_array)
+void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, float * rgb_array)
 {
     float hprime = 0.0;
     float x = 0.0; // working/swap variable
@@ -99,15 +99,15 @@ void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, int * rgb_
         bprime = x;
         rprime = chroma;
         break;
-  }
+    }
 
-  // Calculate luma difference
-  x = luma - (LUMA_R_COEFF*rprime + LUMA_G_COEFF*gprime + LUMA_B_COEFF*bprime);
-  x /= 3;
+    // Calculate luma difference
+    x = luma - (LUMA_R_COEFF*rprime + LUMA_G_COEFF*gprime + LUMA_B_COEFF*bprime);
+    x /= 3;
   
-  rgb_array[0] = (rprime + x) * 255;
-  rgb_array[1] = (gprime + x) * 255;
-  rgb_array[2] = (bprime + x) * 255;
+    rgb_array[0] = rprime + x;
+    rgb_array[1] = gprime + x;
+    rgb_array[2] = bprime + x;
 }
 
 /**
