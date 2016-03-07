@@ -4,5 +4,4 @@ Investigate S instead of C (% of max chroma possible for that luma)
  -- Maybe multiply chroma by luma if luma < 0.5
  --- and chroma by (1-luma) if luma > 0.5 
  --- then do hprime calc
-Improve the "test suite"
 Add float to int calculator
