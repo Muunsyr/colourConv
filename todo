@@ -1,4 +1,3 @@
-Make conversion return floats
 Make it assume inputs correct for HCL (they can be out)
 Investigate S instead of C (% of max chroma possible for that luma)
  - This may mess up nice calcs?
