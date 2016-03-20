@@ -17,9 +17,9 @@ int main()
     float expected[3] = {0, 0, 0};
 
     float testHues[TEST_VALS] = {0.0, 30.0, 75.0, 120.0};
-    float testChromas[TEST_VALS] = {0.0, 1.0, 1.0, 1.0};
+    float testChromas[TEST_VALS] = {1.0, 1.0, 1.0, 1.0};
     float testSats[TEST_VALS] = {0.0, 1.0, 1.0, 1.0};
-    float testLumas[TEST_VALS] = {0.0, 0.25, 0.75, 1.0};
+    float testLumas[TEST_VALS] = {0.3, 0.25, 0.75, 1.0};
     float testHPrimes[TEST_VALS] = {0.0, 0.5, 1.0, 1.5};
 
     float expectedReds[TEST_VALS] = {1.0, 0.0, 0.0, 0.0};
@@ -104,7 +104,20 @@ bool sameColour(float *expected, float *actual) {
 }
 
 void diag(float *rgb) {
-    printf("Red: %d\n", int(rgb[0]*255));
-    printf("Green: %d\n", int(rgb[1]*255));
-    printf("Blue: %d\n", int(rgb[2]*255));
+    // Transform to ints with appropriate rounding.
+    int r, g, b;
+    r = int(rgb[0]*255);
+    g = int(rgb[1]*255);
+    b = int(rgb[2]*255);
+
+    if (rgb[0] - r >= 0.5)
+        r++;
+    if (rgb[1] - g >= 0.5)
+        g++;
+    if (rgb[2] - b >= 0.5)
+        b++;
+
+    printf("Red: %d\n", r);
+    printf("Green: %d\n", g);
+    printf("Blue: %d\n", b);
 }
