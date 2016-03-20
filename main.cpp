@@ -4,6 +4,7 @@
 #include "colourConverter.h"
 
 #define TEST_VALS 4
+#define ERROR_MARGIN 0.1
 using namespace std;
 
 bool sameColour(float *, float *);
@@ -95,7 +96,11 @@ int main()
 bool sameColour(float *expected, float *actual) {
     float result = true;
     for (int i = 0; i < 3; i++) {
-        if (expected[i] != actual[i]) {
+        float diff = expected[i] - actual[i];
+        if (diff < 0.0)
+            diff *= -1;
+
+        if (diff > ERROR_MARGIN) {
             result = false;
             break;
         }
