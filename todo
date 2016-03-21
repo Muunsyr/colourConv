@@ -1,7 +1,10 @@
-Make it assume inputs correct for HCL (they can be out)
-Investigate S instead of C (% of max chroma possible for that luma)
- - This may mess up nice calcs?
- -- Maybe multiply chroma by luma if luma < 0.5
- --- and chroma by (1-luma) if luma > 0.5 
- --- then do hprime calc
-Add float to int calculator
+* Make it assume inputs correct for HCL (they can be out)
+
+* Investigate S instead of C (% of max chroma possible for that luma)
+- Use sector to calculate luminance of 100% chroma
+- Use this value to then calculate % luma, which is max chroma at this luma
+- The calculate required chroma from saturation at this luma
+
+* Split calculations into smaller functions.
+
+* Add float to int calculator
