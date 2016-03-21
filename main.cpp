@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include "colourConverter.h"
 
-#define TEST_VALS 4
-#define ERROR_MARGIN 0.1
+#define TEST_VALS 7
+#define ERROR_MARGIN 0.01
 using namespace std;
 
 bool sameColour(float *, float *);
@@ -17,16 +17,16 @@ int main()
     float rgb[3] = {0, 0, 0}; // Result var
     float expected[3] = {0, 0, 0};
 
-    float testHues[TEST_VALS] = {0.0, 30.0, 75.0, 120.0};
-    float testChromas[TEST_VALS] = {1.0, 1.0, 1.0, 1.0};
-    float testSats[TEST_VALS] = {0.0, 1.0, 1.0, 1.0};
-    float testLumas[TEST_VALS] = {0.3, 0.25, 0.75, 1.0};
-    float testHPrimes[TEST_VALS] = {0.0, 0.5, 1.0, 1.5};
+    float testHues[TEST_VALS] = {0.0, 0.0, 0.0, 0.0, 30.0, 75.0, 120.0};
+    float testChromas[TEST_VALS] = {1.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0};
+    float testSats[TEST_VALS] = {0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0};
+    float testLumas[TEST_VALS] = {0.3, 0.0, 0.5, 1.0, 0.595, 0.815, 0.59};
+    float testHPrimes[TEST_VALS] = {0.0, 0.0, 0.0, 0.0, 0.5, 1.0, 1.5};
 
-    float expectedReds[TEST_VALS] = {1.0, 0.0, 0.0, 0.0};
-    float expectedGreens[TEST_VALS] = {0.0, 0.0, 0.0, 0.0};
-    float expectedBlues[TEST_VALS] = {0.0, 0.0, 0.0, 0.0};
-    float expectedMinorComp[TEST_VALS] = {0.0, 0.5, 1.0, 0.5};
+    float expectedReds[TEST_VALS] = {1.0, 0.0, 0.5, 1.0, 1.0, 0.75, 0.0};
+    float expectedGreens[TEST_VALS] = {0.0, 0.0, 0.5, 1.0, 0.5, 1.0, 1.0};
+    float expectedBlues[TEST_VALS] = {0.0, 0.0, 0.5, 1.0, 0.0, 0.0, 0.0};
+    float expectedMinorComp[TEST_VALS] = {0.0, 0.0, 0.0, 0.0, 0.5, 1.0, 0.5};
 
     colourConverter cc;
     
@@ -54,7 +54,8 @@ int main()
         expected[1] = expectedGreens[i];
         expected[2] = expectedBlues[i];
         if (!sameColour(expected, rgb)) {
-            printf("FAIL - HCL to RGB conversion. Expected:\n");
+            printf("FAIL - HCL to RGB conversion.\n");
+            printf("Hue: %f Expected:\n", testHues[i]);
             diag(expected);
             printf("Actual:\n");
             pass = false;
@@ -63,7 +64,7 @@ int main()
 
         // Ensure values are in correct range
         for (int i = 0; i < 3; i++) {
-            if (rgb[i] < 0 || rgb[i] > 1) {
+            if (rgb[i] < -0.000001 || rgb[i] > 1.000001) {
                 printf("FAIL - Comp '%d', outside range [0, 1.0] at %f.\n",
                     i, rgb[i]);
                 pass = false;
@@ -80,7 +81,7 @@ int main()
     }
 
     if (pass) {
-        printf("SUCCESS!");
+        printf("SUCCESS!\n");
         return 0;
     }
 

@@ -103,7 +103,6 @@ void colourConverter::hcl_to_rgb(float hue, float chroma, float luma, float * rg
 
     // Calculate luma difference
     x = luma - (LUMA_R_COEFF*rprime + LUMA_G_COEFF*gprime + LUMA_B_COEFF*bprime);
-    x /= 3;
   
     rgb_array[0] = rprime + x;
     rgb_array[1] = gprime + x;
